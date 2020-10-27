@@ -1,21 +1,43 @@
 import random
 
 
+def menu():
+    print(""" _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \\ / _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|
+                    __/ |                      
+                   |___/    
+
+        Hi! Welcome to the Hangman's game!  
+
+            1: Easy        2: Hard""")
+    difficulty = int(input("       Please choose a difficulty (1/2): "))
+    return difficulty
+
+
 def readfile():
+    if menu() == 1:
+        diff = 0
+    if menu() == 2:
+        diff = 1
     hidden = ''
     file1 = open('countries-and-capitals.txt', 'r')
     countryandcapital = file1.readlines()
     file1.close()
     number = random.randint(0, len(countryandcapital))
-    hidden = countryandcapital[number].split(' | ')[0]
+    hidden = countryandcapital[number].split(' | ')[diff]
     return hidden
 
 
 def play(word, lives):
-    guesses = {'a', 'r'}
+    guesses = {''}
     while lives > 0:
         missing = 0
-        guess = input('Enter a letter:')
+        print('Your previous guesses:', ' '.join(guesses))
+        guess = input('Enter a letter: ')
         guesses.add(guess.lower())
         for char in word:
             if char.casefold() in guesses or not char.isalpha():
@@ -25,23 +47,8 @@ def play(word, lives):
                 missing = missing + 1
         print('\n')
         if missing == 0:
-            print("A winner is you!")
+            print("You win!")
             break
 
 
-def menu():
-    print(""" _                                             
-| |                                            
-| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
-| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
-| | | | (_| | | | | (_| | | | | | | (_| | | | |
-|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
-                    __/ |                      
-                   |___/                       
-        1: Easy     2: Medium   3: Hard
-        Hi! Welcome to the Hangman's game!""")
-    difficulty = int(input("Please choose a difficulty(1/2/3): "))
-    play(readfile(), difficulty)
-
-
-menu()
+play(readfile(), 6)
