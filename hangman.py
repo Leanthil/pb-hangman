@@ -29,4 +29,4 @@ def play(word, lives):
             break
 
 
-play('Saudi Arabia', 6)
+play(readfile(), 6)
