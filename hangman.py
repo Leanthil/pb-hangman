@@ -29,4 +29,19 @@ def play(word, lives):
             break
 
 
-play(readfile(), 6)
+def menu():
+    print(""" _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                    __/ |                      
+                   |___/                       
+        1: Easy     2: Medium   3: Hard
+        Hi! Welcome to the Hangman's game!""")
+    difficulty = int(input("Please choose a difficulty(1/2/3): "))
+    play(readfile(), difficulty)
+
+
+menu()
