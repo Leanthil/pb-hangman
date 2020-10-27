@@ -14,17 +14,13 @@ def menu():
         Hi! Welcome to the Hangman's game!  
 
             1: Easy        2: Hard""")
-    difficulty = int(input("Please choose a difficulty! If you'd like to quit the game, type '3' (1/2/3): "))
-    if difficulty == 3:
-        print("Goodbye!")
-        exit()
-    else:
-        play(readfile(difficulty), lifecount(difficulty))
+    difficulty = int(input("Please choose a difficulty! (1/2): "))
+    play(readfile(difficulty), lifecount(difficulty))
 
 
 def lifecount(easyorhard):
     if easyorhard == 1:
-        return 10
+        return 9
     else:
         return 7
 
@@ -49,7 +45,10 @@ def play(word, lives):
         missing = 0
         print('Your previous guesses:', ' '.join(guesses))
         print('Lives remaining: ', lives)
-        guess = input('Enter a letter: ')
+        guess = input('Enter a letter! If you would like to quit, type "quit": ')
+        if guess == 'quit':
+            print("Goodbye!")
+            exit()
         guesses.add(guess.lower())
         if guess not in word.lower():
             lives = lives - 1
