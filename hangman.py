@@ -49,9 +49,12 @@ def play(word, lives):
         if guess == 'quit':
             print("Goodbye!")
             exit()
+        if guess in guesses or guess not in word.lower():
+            if guess not in word.lower() and guess not in guesses:
+                lives = lives - 1
+            if guess in guesses:
+                print("You have already guessed this letter! Try something else!")
         guesses.add(guess.lower())
-        if guess not in word.lower():
-            lives = lives - 1
         for char in word:
             if char.casefold() in guesses or not char.isalpha():
                 print(char, end=' ')
