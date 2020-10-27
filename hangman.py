@@ -34,11 +34,14 @@ def readfile():
 
 def play(word, lives):
     guesses = {''}
-    while lives > 0:
+    while lives != 0:
         missing = 0
         print('Your previous guesses:', ' '.join(guesses))
+        print('Lives remaining: ', lives)
         guess = input('Enter a letter: ')
         guesses.add(guess.lower())
+        if guess not in word:
+            lives = lives - 1
         for char in word:
             if char.casefold() in guesses or not char.isalpha():
                 print(char, end=' ')
@@ -46,6 +49,9 @@ def play(word, lives):
                 print('_', end=' ')
                 missing = missing + 1
         print('\n')
+        if lives == 0:
+            print("You lost!")
+            break
         if missing == 0:
             print("You win!")
             break
