@@ -14,15 +14,19 @@ def menu():
         Hi! Welcome to the Hangman's game!  
 
             1: Easy        2: Hard""")
-    difficulty = int(input("       Please choose a difficulty (1/2): "))
-    play(readfile(difficulty), lifecount(difficulty))
+    difficulty = int(input("Please choose a difficulty! If you'd like to quit the game, type '3' (1/2/3): "))
+    if difficulty == 3:
+        print("Goodbye!")
+        exit()
+    else:
+        play(readfile(difficulty), lifecount(difficulty))
 
 
 def lifecount(easyorhard):
     if easyorhard == 1:
-        return 7
-    else:
         return 10
+    else:
+        return 7
 
 
 def readfile(easyorhard):
