@@ -15,13 +15,20 @@ def menu():
 
             1: Easy        2: Hard""")
     difficulty = int(input("       Please choose a difficulty (1/2): "))
-    return difficulty
+    play(readfile(difficulty), lifecount(difficulty))
 
 
-def readfile():
-    if menu() == 1:
+def lifecount(easyorhard):
+    if easyorhard == 1:
+        return 7
+    else:
+        return 10
+
+
+def readfile(easyorhard):
+    if easyorhard == 1:
         diff = 0
-    if menu() == 2:
+    else:
         diff = 1
     hidden = ''
     file1 = open('countries-and-capitals.txt', 'r')
@@ -40,7 +47,7 @@ def play(word, lives):
         print('Lives remaining: ', lives)
         guess = input('Enter a letter: ')
         guesses.add(guess.lower())
-        if guess not in word:
+        if guess not in word.lower():
             lives = lives - 1
         for char in word:
             if char.casefold() in guesses or not char.isalpha():
@@ -57,4 +64,4 @@ def play(word, lives):
             break
 
 
-play(readfile(), 6)
+menu()
