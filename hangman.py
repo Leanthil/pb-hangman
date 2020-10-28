@@ -51,6 +51,8 @@ def play(word, lives):
         guess = str(input('Enter a letter! If you would like to quit, type "quit": '))
         print("\033c")
         if guess.isalpha() is False:
+            print('_ ' * len(word))
+            print(hangman(lives))
             print("This is not a letter!")
             continue
         if guess == 'quit':
@@ -60,7 +62,7 @@ def play(word, lives):
             if guess.casefold() not in word.lower() and guess.casefold() not in guesses:
                 lives = lives - 1
             if guess in guesses:
-                print("You have already guessed this letter! Try something else!")                
+                print("You have already guessed this letter! Try something else!")
         guesses.add(guess.lower())
         for char in word:
             if char.casefold() in guesses or not char.isalpha():
