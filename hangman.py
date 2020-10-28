@@ -2,16 +2,16 @@ import random
 
 
 def menu():
-    print(""" _                                             
-| |                                            
-| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
-| '_ \\ / _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\ 
+    print(""" _
+| |
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __
+| '_ \\ / _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\
 | | | | (_| | | | | (_| | | | | | | (_| | | | |
 |_| |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|
-                    __/ |                      
-                   |___/    
+                    __/ |
+                   |___/
 
-        Hi! Welcome to the Hangman's game!  
+        Hi! Welcome to the Hangman's game!
 
             1: Easy        2: Hard""")
     difficulty = int(input("Please choose a difficulty! (1/2): "))
@@ -41,6 +41,7 @@ def readfile(easyorhard):
 
 def play(word, lives):
     guesses = {''}
+    print(hangman(lives))
     while lives != 0:
         missing = 0
         print('Your previous guesses:', ' '.join(guesses))
@@ -62,12 +63,88 @@ def play(word, lives):
                 print('_', end=' ')
                 missing = missing + 1
         print('\n')
+        print(hangman(lives))
         if lives == 0:
             print("You lost!")
             break
         if missing == 0:
             print("You win!")
             break
+
+
+def hangman(lives):
+    stages = ['''
+          +----+
+          |   \\|
+          O    |
+         /|\\   |
+         / \\   |
+               |
+        ==========''', '''
+          +----+
+          |   \\|
+          O    |
+         /|\\   |
+         /     |
+               |
+        ==========''', '''
+          +----+
+          |   \\|
+          O    |
+         /|\\   |
+               |
+               |
+        ==========''', '''
+          +----+
+          |   \\|
+          O    |
+         /|    |
+               |
+               |
+        =========''', '''
+          +----+
+          |   \\|
+          O    |
+          |    |
+               |
+               |
+        ==========''', '''
+          +----+
+          |   \\|
+          O    |
+               |
+               |
+               |
+        ==========''', '''
+          +----+
+          |   \\|
+               |
+               |
+               |
+               |
+        ==========''', '''
+
+              |
+              |
+              |
+              |
+              |
+        ==========''', '''
+
+
+
+
+
+
+        ==========''', '''
+
+
+
+
+
+
+                  ''']
+    return stages[lives]
 
 
 menu()
