@@ -40,13 +40,19 @@ def readfile(easyorhard):
 
 
 def play(word, lives):
+    print("\033c")
     guesses = {''}
+    print('_ ' * len(word))
     print(hangman(lives))
     while lives != 0:
         missing = 0
         print('Your previous guesses:', ' '.join(guesses))
         print('Lives remaining: ', lives)
-        guess = input('Enter a letter! If you would like to quit, type "quit": ')
+        guess = str(input('Enter a letter! If you would like to quit, type "quit": '))
+        print("\033c")
+        if guess.isalpha() is False:
+            print("This is not a letter!")
+            continue
         if guess == 'quit':
             print("Goodbye!")
             exit()
@@ -54,7 +60,7 @@ def play(word, lives):
             if guess.casefold() not in word.lower() and guess.casefold() not in guesses:
                 lives = lives - 1
             if guess in guesses:
-                print("You have already guessed this letter! Try something else!")
+                print("You have already guessed this letter! Try something else!")                
         guesses.add(guess.lower())
         for char in word:
             if char.casefold() in guesses or not char.isalpha():
@@ -124,11 +130,11 @@ def hangman(lives):
                |
         ==========''', '''
 
-              |
-              |
-              |
-              |
-              |
+               |
+               |
+               |
+               |
+               |
         ==========''', '''
 
 
