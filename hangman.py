@@ -2,6 +2,7 @@ import random
 
 
 def menu():
+    print("\033c")
     print(""" _
 | |
 | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __
@@ -10,11 +11,9 @@ def menu():
 |_| |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|
                     __/ |
                    |___/
-
-        Hi! Welcome to the Hangman's game!
-
-            1: Easy        2: Hard""")
-    difficulty = int(input("Please choose a difficulty! (1/2): "))
+        Hi! Welcome to the Hangman game!
+             1: Easy        2: Hard""")
+    difficulty = int(input("      Please choose a difficulty! (1/2): "))
     play(readfile(difficulty), lifecount(difficulty))
 
 
@@ -48,7 +47,8 @@ def play(word, lives):
         missing = 0
         print('Your previous guesses:', ' '.join(guesses))
         print('Lives remaining: ', lives)
-        guess = str(input('Enter a letter! If you would like to quit, type "quit": '))
+        print('If you would like to quit, type "quit"')
+        guess = str(input('Enter a letter! '))
         print("\033c")
         if guess.isalpha() is False:
             print('_ ' * len(word))
@@ -74,10 +74,21 @@ def play(word, lives):
         print(hangman(lives))
         if lives == 0:
             print("You lost!")
-            break
+            print("The word was: " + word)
+            again = str(input('Would you like to play again? (Y/N): '))
+            if again == 'Y' or again == 'y':
+                menu()
+            else:
+                print('Goodbye!')
+                break
         if missing == 0:
-            print("You win!")
-            break
+            print("You won!")
+            again = str(input('Would you like to play again? (Y/N): '))
+            if again == 'Y' or again == 'y':
+                menu()
+            else:
+                print('Goodbye!')
+                break
 
 
 def hangman(lives):
@@ -131,26 +142,13 @@ def hangman(lives):
                |
                |
         ==========''', '''
-
                |
                |
                |
                |
                |
         ==========''', '''
-
-
-
-
-
-
         ==========''', '''
-
-
-
-
-
-
                   ''']
     return stages[lives]
 
